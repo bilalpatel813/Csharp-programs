@@ -23,5 +23,10 @@ public class Test
 
             a++;
         }
+        string[] names = {"Ali", "Bilal"};
+        foreach (string name in names)
+        {
+            Console.WriteLine(name);
+        }
     }
 }
