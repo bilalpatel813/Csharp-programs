@@ -1,224 +1,560 @@
-# C# Input and Type Conversion
+# C# Roadmap
 
-## Why do we use `ToInt32()`, `ToDouble()`, and `ToSingle()`?
-
-`Console.ReadLine()` always returns a **string**.
-
-```csharp
-string input = Console.ReadLine();
-```
-
-If the user enters:
-
-```
-20
-```
-
-C# still sees it as:
-
-```csharp
-"20"
-```
-
-To use it as a number, we must convert the string to the required data type.
+A structured path for learning C# from basics to advanced development.
 
 ---
 
-## Common Conversions
+# 1. Variables
 
-| Data Type | C# Alias | Actual .NET Type | Conversion Method |
-|------------|----------|------------------|-------------------|
-| Integer | int | Int32 | Convert.ToInt32() |
-| Long Integer | long | Int64 | Convert.ToInt64() |
-| Short Integer | short | Int16 | Convert.ToInt16() |
-| Decimal Number | double | Double | Convert.ToDouble() |
-| Decimal Number | float | Single | Convert.ToSingle() |
-| High Precision Decimal | decimal | Decimal | Convert.ToDecimal() |
-| True / False | bool | Boolean | Convert.ToBoolean() |
-| Character | char | Char | Convert.ToChar() |
-| Byte | byte | Byte | Convert.ToByte() |
-
----
-
-## Why `ToInt32()` and not `ToInt()`?
-
-`int` is only a nickname (alias).
+Variables store data.
 
 ```csharp
+string name = "Bilal";
 int age = 20;
 ```
 
-Actually, `int` means:
-
-```csharp
-System.Int32
-```
-
-Similarly:
-
-```csharp
-long    → System.Int64
-short   → System.Int16
-float   → System.Single
-double  → System.Double
-bool    → System.Boolean
-char    → System.Char
-```
-
-Therefore:
-
-```csharp
-Convert.ToInt32()
-Convert.ToInt64()
-Convert.ToDouble()
-Convert.ToSingle()
-```
-
-are named after the real .NET types.
+Think of variables as containers.
 
 ---
 
-## Taking Multiple Inputs
+# 2. Data Types
+
+Different kinds of data.
+
+| Type | Example |
+|--------|--------|
+| int | 20 |
+| double | 1.75 |
+| float | 5.6f |
+| char | 'A' |
+| bool | true |
+| string | "Hello" |
+
+Example:
 
 ```csharp
-using System;
+int age = 20;
+double height = 1.75;
+bool student = true;
+```
 
-public class Program
+---
+
+# 3. Operators
+
+## Arithmetic
+
+```csharp
++  Addition
+-  Subtraction
+*  Multiplication
+/  Division
+%  Modulus
+```
+
+Example:
+
+```csharp
+int result = 10 + 5;
+```
+
+## Comparison
+
+```csharp
+==
+!=
+>
+<
+>=
+<=
+```
+
+## Logical
+
+```csharp
+&&
+||
+!
+```
+
+---
+
+# 4. Conditions
+
+Used for decision making.
+
+```csharp
+if (age >= 18)
 {
-    public static void Main()
+    Console.WriteLine("Adult");
+}
+else
+{
+    Console.WriteLine("Minor");
+}
+```
+
+---
+
+# 5. Loops
+
+## For Loop
+
+```csharp
+for (int i = 1; i <= 5; i++)
+{
+    Console.WriteLine(i);
+}
+```
+
+## While Loop
+
+```csharp
+int i = 1;
+
+while (i <= 5)
+{
+    Console.WriteLine(i);
+    i++;
+}
+```
+
+## Foreach Loop
+
+```csharp
+string[] names = {"Ali", "Bilal"};
+
+foreach (string name in names)
+{
+    Console.WriteLine(name);
+}
+```
+
+---
+
+# 6. Methods
+
+Reusable blocks of code.
+
+```csharp
+static int Add(int a, int b)
+{
+    return a + b;
+}
+```
+
+Calling:
+
+```csharp
+int sum = Add(5, 3);
+```
+
+---
+
+# 7. Arrays
+
+Store multiple values.
+
+```csharp
+int[] numbers = {1, 2, 3, 4};
+```
+
+Access:
+
+```csharp
+Console.WriteLine(numbers[0]);
+```
+
+---
+
+# 8. Classes
+
+Blueprint for objects.
+
+```csharp
+class Car
+{
+    public string Brand;
+}
+```
+
+---
+
+# 9. Objects
+
+Instances of classes.
+
+```csharp
+Car car1 = new Car();
+
+car1.Brand = "BMW";
+```
+
+---
+
+# 10. Constructor
+
+Runs automatically when object is created.
+
+```csharp
+class Car
+{
+    public string Brand;
+
+    public Car(string brand)
     {
-        Console.Write("Name: ");
-        string name = Console.ReadLine();
-
-        Console.Write("Age: ");
-        int age = Convert.ToInt32(Console.ReadLine());
-
-        Console.Write("Height: ");
-        double height = Convert.ToDouble(Console.ReadLine());
-
-        Console.Write("Student (true/false): ");
-        bool isStudent = Convert.ToBoolean(Console.ReadLine());
-
-        Console.WriteLine("\nUser Information");
-        Console.WriteLine("Name: " + name);
-        Console.WriteLine("Age: " + age);
-        Console.WriteLine("Height: " + height);
-        Console.WriteLine("Student: " + isStudent);
+        Brand = brand;
     }
 }
 ```
 
----
-
-## Parse Methods
-
-Another way to convert values:
+Creating:
 
 ```csharp
-int age = int.Parse(Console.ReadLine());
-double height = double.Parse(Console.ReadLine());
-float weight = float.Parse(Console.ReadLine());
-bool isStudent = bool.Parse(Console.ReadLine());
-```
-
-### Example
-
-Input:
-
-```
-20
-```
-
-Flow:
-
-```
-Console.ReadLine()
-        ↓
-      "20" (string)
-        ↓
- int.Parse("20")
-        ↓
-        20 (int)
+Car car = new Car("BMW");
 ```
 
 ---
 
-## Safer Conversion with `TryParse()`
+# 11. OOP (4 Pillars)
 
-Using `Parse()` on invalid input causes an error.
+## Encapsulation
+
+Hide data.
 
 ```csharp
-int age;
+private int age;
+```
 
-if (int.TryParse(Console.ReadLine(), out age))
+---
+
+## Inheritance
+
+Reuse code.
+
+```csharp
+class Animal
 {
-    Console.WriteLine("Age: " + age);
 }
-else
+
+class Dog : Animal
 {
-    Console.WriteLine("Invalid input.");
 }
 ```
 
-### Flow
-
-```
-User Input
-    ↓
-"abc"
-    ↓
-TryParse()
-    ↓
-false
-    ↓
-No crash
-```
-
 ---
 
-## Important Rule
+## Polymorphism
 
-**`Console.ReadLine()` always returns a string.**
-
-To work with other data types, convert the string:
+Same method, different behavior.
 
 ```csharp
-int number = Convert.ToInt32(Console.ReadLine());
-double value = Convert.ToDouble(Console.ReadLine());
-float weight = Convert.ToSingle(Console.ReadLine());
-bool isAdmin = Convert.ToBoolean(Console.ReadLine());
+virtual
+override
 ```
 
 ---
 
-## Type Aliases
+## Abstraction
 
-| Alias | Actual Type |
-|---------|-------------|
-| int | Int32 |
-| long | Int64 |
-| short | Int16 |
-| float | Single |
-| double | Double |
-| decimal | Decimal |
-| bool | Boolean |
-| char | Char |
-| string | String |
+Show essential details and hide implementation.
+
+```csharp
+abstract class Animal
+{
+    public abstract void Sound();
+}
+```
 
 ---
 
-## Key Idea
+# 12. Collections
 
-```
-User Input
-    ↓
-Console.ReadLine()
-    ↓
-String
-    ↓
-Conversion
-    ↓
-Required Data Type
+## List
+
+```csharp
+List<int> numbers = new List<int>();
 ```
 
-Everything entered by the user starts as a **string**. Conversion changes that string into the type your program needs.
+## Dictionary
+
+```csharp
+Dictionary<int, string> students;
+```
+
+## HashSet
+
+```csharp
+HashSet<int> ids;
+```
+
+## Queue
+
+FIFO
+
+```csharp
+Queue<int> queue;
+```
+
+## Stack
+
+LIFO
+
+```csharp
+Stack<int> stack;
+```
+
+---
+
+# 13. LINQ
+
+Query collections.
+
+```csharp
+var even = numbers.Where(n => n % 2 == 0);
+```
+
+Sort:
+
+```csharp
+OrderBy()
+```
+
+Filter:
+
+```csharp
+Where()
+```
+
+Select:
+
+```csharp
+Select()
+```
+
+---
+
+# 14. Exception Handling
+
+Prevent crashes.
+
+```csharp
+try
+{
+    int a = 10 / 0;
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+finally
+{
+    Console.WriteLine("Finished");
+}
+```
+
+---
+
+# 15. Async/Await
+
+Execute tasks asynchronously.
+
+```csharp
+async Task GetData()
+{
+    await Task.Delay(2000);
+}
+```
+
+Used for:
+
+- APIs
+- Database operations
+- File operations
+
+---
+
+# 16. File Handling
+
+Read file:
+
+```csharp
+File.ReadAllText("test.txt");
+```
+
+Write file:
+
+```csharp
+File.WriteAllText("test.txt", "Hello");
+```
+
+Append:
+
+```csharp
+File.AppendAllText();
+```
+
+---
+
+# 17. Database (SQL)
+
+Create table:
+
+```sql
+CREATE TABLE Users
+(
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+```
+
+Insert:
+
+```sql
+INSERT INTO Users VALUES (1,'Bilal');
+```
+
+Select:
+
+```sql
+SELECT * FROM Users;
+```
+
+Update:
+
+```sql
+UPDATE Users
+SET Name='Ali'
+WHERE Id=1;
+```
+
+Delete:
+
+```sql
+DELETE FROM Users
+WHERE Id=1;
+```
+
+---
+
+# 18. ASP.NET Core
+
+Used for:
+
+- Web APIs
+- Authentication
+- MVC
+- Backend Development
+
+Example:
+
+```csharp
+[HttpGet]
+public IActionResult Get()
+{
+    return Ok();
+}
+```
+
+---
+
+# 19. Unity Game Development
+
+Uses C#.
+
+Main concepts:
+
+- GameObject
+- Transform
+- Components
+- Rigidbody
+- Collider
+- Update()
+- Input System
+
+Example:
+
+```csharp
+void Update()
+{
+    transform.Translate(Vector3.forward);
+}
+```
+
+---
+
+# 20. Design Patterns
+
+Reusable software solutions.
+
+## Singleton
+
+One object only.
+
+```csharp
+public static GameManager Instance;
+```
+
+---
+
+## Factory
+
+Creates objects.
+
+```csharp
+Enemy enemy = EnemyFactory.Create();
+```
+
+---
+
+## Observer
+
+Event-driven communication.
+
+```csharp
+event Action OnDeath;
+```
+
+---
+
+# Learning Order
+
+Variables
+↓
+Data Types
+↓
+Operators
+↓
+Conditions
+↓
+Loops
+↓
+Methods
+↓
+Arrays
+↓
+Classes
+↓
+Objects
+↓
+Constructors
+↓
+OOP
+↓
+Collections
+↓
+LINQ
+↓
+Exception Handling
+↓
+Async/Await
+↓
+File Handling
+↓
+SQL
+↓
+ASP.NET Core
+↓
+Unity Game Development
+↓
+Design Patterns
