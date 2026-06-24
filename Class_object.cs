@@ -10,6 +10,7 @@ namespace MyProgram
             Car car1 = new Car("Porsche");
             Car car2 = new Car("Mustang");
             Car car3 = new Car("Lambo");
+            Car car4 = new Car() ;
 
             Console.WriteLine("Number of cars: " + Car.NumberOfCars);
 
@@ -25,7 +26,7 @@ namespace MyProgram
         // Static variable shared by all objects of the class
         public static int NumberOfCars;
 
-        // Constructor
+        //  parameterized Constructor
         public Car(string name)
         {
             Name = name;
@@ -34,7 +35,12 @@ namespace MyProgram
 
             NumberOfCars++;
         }
-
+        //Default constructor 
+        public Car() 
+        {
+        	string name ="BMW";	
+        	Console.WriteLine("name of car :"+name) ;
+        } 
         public static void Start()
         {
             Console.WriteLine("Race is started!!");
